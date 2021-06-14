@@ -4,13 +4,12 @@ from tkinter import messagebox
 from PIL import Image, ImageTk
 
 root = tk.Tk()
-root.title("SIGN UP")
-root.geometry("1000x820")
-root.config(background='yellow')
-loader = Image.open("phanda.png")
+root.title("Ithuba National Lottery")
+root.geometry("2560x1536")
+loader = Image.open("LOTTO BALLS.jpg")
 render = ImageTk.PhotoImage(loader)
 img = Label(root, image=render)
-img.place(x=400, y=130)
+img.place(x=0, y=0)
 
 
 # function
@@ -28,8 +27,8 @@ def logins():
 
 # labels& entries
 
-head = Label(root, text="YOUR TICKET TO MILLIONNERS", font=("bold", 20), bg="green", fg="white")
-head.grid(row=0, column=4)
+head = Label(root, text="YOUR TICKET TO BECOMING ONE OF THE MILLIONAIRE", font=("bold", 20), bg="green", fg="white")
+head.grid(row=0, column=4, )
 
 name = Label(text="NAME", fg="black", bg="yellow", font=("bold", 18))
 name.place(x=300, y=323)

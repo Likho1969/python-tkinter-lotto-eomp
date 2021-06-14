@@ -1,6 +1,7 @@
 import tkinter as tk
 import random
 from tkinter import messagebox
+from PIL import Image, ImageTk
 
 
 def verify():
@@ -9,8 +10,11 @@ def verify():
 
 root = tk.Tk()
 root.title("Lotto Draw")
-root.geometry("1000x820")
-root.config(background="yellow")
+root.geometry("5000x1536")
+loader = Image.open(")
+render = ImageTk.PhotoImage(loader)
+img = tk.Label(root, image=render)
+img.place(x=0, y=0)
 
 lottries = tk.Label(root, text="WALALA WASALA", font=("bold", 20), bg="yellow", fg="black")
 lottries.grid(row=1, column=1)
