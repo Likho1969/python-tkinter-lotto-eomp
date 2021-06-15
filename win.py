@@ -10,8 +10,8 @@ def verify():
 
 root = tk.Tk()
 root.title("Lotto Draw")
-root.geometry("5000x1536")
-loader = Image.open(")
+root.geometry("2560x1536")
+loader = Image.open("LOTTO BALLS.jpg")
 render = ImageTk.PhotoImage(loader)
 img = tk.Label(root, image=render)
 img.place(x=0, y=0)
@@ -60,20 +60,20 @@ def luck():
     todaylotto = sorted(random.sample(range(1, 49), 6))
 
     if any(my_list) < 0 or any(my_list) < 50:
-        messagebox.showinfo("hurray", "Get ready")
+        messagebox.showinfo("Let's Play", "Get ready")
 
         if len(todaylotto) == len(my_list):
             same = set(todaylotto).intersection(set(my_list))
             if len(same) == 6:
-                result_answer.config(text="Jackpot Hurray \n" + "You just got your self Price : R10, 000 000.00" + "\n Today Lotto Numbers are" + str(todaylotto))
+                result_answer.config(text="Jackpot Hurray \n " + "You just got your self Price : R10, 000 000.00 " + "\n Today Lotto Numbers are" + str(todaylotto))
             elif len(same) == 5:
-                result_answer.config(text="Felicitations: " + "You got 5 numbers correct" + "\n With this Outstanding Achievement" + "You won yourself R8, 584.00" + "\n Today Lotto Numbers are" + str(todaylotto))
+                result_answer.config(text="Felicitations: " + "You got 5 numbers correct" + "\n With this Outstanding Achievement " + "You won yourself R8, 584.00" + "\n Today Lotto Numbers are" + str(todaylotto))
             elif len(same) == 4:
-                result_answer.config(text="Felicitations: " + "You got 4 numbers correct" + "\n With this Meritorious Achievement" + "You won yourself R2, 384.00" + "\n Today Lotto Numbers are" + str(todaylotto))
+                result_answer.config(text="Felicitations: " + "You got 4 numbers correct" + "\n With this Meritorious Achievement " + "You won yourself R2, 384.00" + "\n Today Lotto Numbers are" + str(todaylotto))
             elif len(same) == 3:
-                result_answer.config(text="Felicitations: " + "You got 3 numbers correct" + "\n With this Substantial Achievement" + "You won yourself R100.50" + "\n Today Lotto Numbers are" + str(todaylotto))
+                result_answer.config(text="Felicitations: " + "You got 3 numbers correct" + "\n With this Substantial Achievement " + "You won yourself R100.50 " + "\n Today Lotto Numbers are" + str(todaylotto))
             elif len(same) == 2:
-                result_answer.config(text="Felicitations: " + "You got 2 numbers correct" + "\n With this Adequate Achievement" + "You won yourself R20.00" + "\n Today Lotto Numbers are" + str(todaylotto))
+                result_answer.config(text="Felicitations: " + "You got 2 numbers correct" + "\n With this Adequate Achievement " + "You won yourself R20.00 " + "\n Today Lotto Numbers are" + str(todaylotto))
             elif len(same) == 1:
                 messagebox.showinfo("RESULT", "We are sorry you only got one correct lotto numbers are: " + str(todaylotto))
             elif len(same) == 0:
@@ -88,7 +88,7 @@ def luck():
         num6.delete(0, tk.END)
 
 
-btn = tk.Button(root, text="CHECK YOUR RESULTS", bg="magenta", command=luck)
+btn = tk.Button(root, text="PLAY", bg="magenta", command=luck)
 btn.grid(row=10, column=0)
 
 root.mainloop()
