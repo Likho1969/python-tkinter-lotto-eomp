@@ -1,67 +1,199 @@
-from tkinter import *
 import tkinter as tk
-from PIL import Image, ImageTk
+from tkinter import *
+from tkinter import ttk
+from datetime import datetime
 import requests
+from tkinter import messagebox
+window = tk.Tk()
+window.config(bg="#FF6FAE")
+window.geometry("600x500")
+window.title("Currency Converter")
 
-root = Tk()
-root.title("Paypal")
-root.geometry("1024x819")
-render = Image.open("currency-s.jpg")
-loader = ImageTk.PhotoImage(render)
-img = tk.Label(root, image=loader)
-img.place(x=0, y=0)
-
-
-class Paypal:
-        def __init__(self):
-            self.convert_btn = tk.Button(root, text="Submit", font=10, borderwidth="10", fg="black")
-            self.convert_btn.place(x=5, y=300)
-            self.clear_btn = tk.Button(root, text="Clear", borderwidth="10", command=self.clear, fg="black")
-            self.clear_btn.place(x=300, y=300)
-            self.exit_btn = tk.Button(root, text="Exit", borderwidth="10", command=self.exit_program, fg="black")
-            self.exit_btn.place(x=5, y=370)
-            self.value = StringVar()
-            self.StringVar = IntVar()
-
-            self.information = requests.get('https://v6.exchangerate-api.com/v6/3b6104d9c62069d198e73219/latest/USD')
-            self.information_json = self.information.json()
-
-        def currency(self):
-            self.conversion_rate = self.information_json['conversion_rates']
-            return self.conversion_rate
-
-            # Creating a label and entries
-            self.my_label1 = Label(root, text="Paypal Name", )
-            self.my_label1.place(x=5, y=10)
-
-            self.my_entry1 = Entry(root, width=10)
-            self.my_entry1.place(x=100, y=10)
-
-            self.my_label2 = Label(root, text="Email address",)
-            self.my_label2.place(x=5, y=40)
-
-            self.my_entry2 = Entry(root, width=10)
-            self.my_entry2.place(x=100, y=40)
-
-            self.my_label2 = Label(root, text="Choose currency")
-            self.my_label2.place(x=5, y=70)
+# defining a function
 
 
-    # Doing the Conversion of the data with its loop
-            self.convert_list = Listbox(root, width=20)
-            for i in self.conversion_rate.keys():
-               self.convert_list.insert(END, str(i))
-            self.convert_list.place(x=130, y=90)
+def show_data():
+    amount = E1.get()
+    from_currency = c1.get()
+    to_currency = c2.get()
+    url = 'http://api.currencylayer.com/live?access_key=4273d2c37f738367f08780b934ce7dda&format=1'
 
-        def clear(self):
-              self.my_entry1.delete(0, END)
+    if amount == '':
+        messagebox.showerror("Exchange Rate", "Please Fill the Amount")
+    elif to_currency == '':
+        messagebox.showerror("Exchange Rate", "Please Choose the Currency")
+
+    else:
+        data = requests.get(url).json()
+        currency = from_currency.strip()+to_currency.strip()
+        amount = int(amount)
+        cc = data['quotes'][currency]
+        cur_conv = cc*amount
+        E2.insert(0, cur_conv)
+
+        text.insert('end', f'{amount} South African Rands Equals {cur_conv} {to_currency} \n\n '
+                           f'Last Time Update --- \t {datetime.now()}')
+
+# defining function for clear button
 
 
-        def exit_program(self):
-              root.destroy()
-    # creating btn
+def clear():
+    E1.delete(0, 'end')
+    E2.delete(0, 'end')
+    text.delete(1.0, 'end')
+
+#  Labeling the Sub-title and putting other labels
 
 
-if __name__ == "__main__":
-    my_app = Paypal()
-    root.mainloop()
+l1 = Label(window, text="Exchange Rates", font=('sans serif', '10', 'bold'), borderwidth=5)
+l1.place(x=250, y=10)
+
+amt = Label(window, text="Amount", font=('sans serif', 10, 'bold'))
+amt.place(x=50, y=15)
+E1 = Entry(window, width=20, borderwidth=5, font=('sans serif', 10, 'bold'))
+E1.place(x=20, y=40)
+
+c1 = tk.StringVar()
+c2 = tk.StringVar()
+currency_choose1 = ttk.Combobox(window, width=20, textvariable=c1, state='readonly', font=('sans serif', 10, 'bold'))
+
+# Adding combobox drop down list
+currency_choose1['values'] = (
+                          ' ZAR',
+                          )
+
+currency_choose1.place(x=300, y=40)
+currency_choose1.current(0)
+
+
+E2 = Entry(window, width=20, borderwidth=5, font=('sans serif', 10, 'bold'))
+E2.place(x=20, y=80)
+
+
+currency_choose2 = ttk.Combobox(window, width=20, textvariable=c2, state='readonly', font=('sans serif', '10', 'bold'))
+
+# Adding combobox drop down list to choose currency of a country
+currency_choose2['values'] = ('ALL',
+                              'AFN',
+                              'ARS',
+                              'AWG',
+                              'AUD',
+                              'AZN',
+                              'BSD',
+                              'BBD',
+                              'BYN',
+                              'BZD',
+                              'BMD',
+                              'BOB',
+                              'BAM',
+                              'BWP',
+                              'BGN',
+                              'BND',
+                              'KHR',
+                              'CAD',
+                              'KYD',
+                              'CLP',
+                              'CNY',
+                              'COP',
+                              'CRC',
+                              'HRK',
+                              'CUP',
+                              'CZK',
+                              'DKK',
+                              'DOP',
+                              'XCD',
+                              'EGP',
+                              'SVC',
+                              'EUR',
+                              'FKP',
+                              'FJD',
+                              'GHS',
+                              'GIP',
+                              'GTQ',
+                              'GGP',
+                              'GYD',
+                              'HNL',
+                              'HKD',
+                              'HUF',
+                              'ISK',
+                              'INR',
+                              'IDR',
+                              'IRR',
+                              'IMP',
+                              'ILS',
+                              'JMD',
+                              'JPY',
+                              'KZT',
+                              'KPW',
+                              'KRW',
+                              'KGS',
+                              'LAK',
+                              'LBP',
+                              'LRD',
+                              'MKD',
+                              'MYR',
+                              'MUR',
+                              'MXN',
+                              'MNT',
+                              'MZN',
+                              'NAD',
+                              'NPR',
+                              'ANG',
+                              'NZD',
+                              'NIO',
+                              'NGN',
+                              'NOK',
+                              'OMR',
+                              'PKR',
+                              'PAB',
+                              'PYG',
+                              'PEN',
+                              'PHP',
+                              'PLN',
+                              'QAR',
+                              'RON',
+                              'RUB',
+                              'SHP',
+                              'SAR',
+                              'RSD',
+                              'SCR',
+                              'SGD',
+                              'SBD',
+                              'SOS',
+                              'LKR',
+                              'SEK ',
+                              'CHF',
+                              'SRD',
+                              'SYP',
+                              'TWD',
+                              'THB',
+                              'TTD',
+                              'TRY',
+                              'TVD',
+                              'UAH',
+                              'GBP',
+                              'USD',
+                              'UYU',
+                              'UZS',
+                              'VEF',
+                              'VND',
+                              'YER',
+                              'ZWD',
+                              'ZAR')
+
+currency_choose2.place(x=300, y=80)
+currency_choose2.current()
+
+# Creating a block to display the information
+text = Text(window, height=8, width=40, font=('sans serif', '10', 'bold'))
+text.place(x=100, y=120)
+# Buttons
+B = Button(window, text="Convert", command=show_data, font=('sans serif', '10', 'bold'),
+           borderwidth=3, bg="#FF6FAE", fg="white")
+B.place(x=10, y=130)
+
+clear = Button(window, text="Clear", command=clear, font=('verdana', '10', 'bold'),
+               borderwidth=5, bg="#FF6FAE", fg="white")
+clear.place(x=20, y=200)
+
+window.mainloop()

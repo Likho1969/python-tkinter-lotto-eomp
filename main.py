@@ -24,8 +24,8 @@ class Lotto:
 
         else:
             self.root.destroy()
-            import win
-            win.verify()
+            import lotto_window
+            lotto_window.verify()
 
 
     def create_widgets(self):

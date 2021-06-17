@@ -74,11 +74,12 @@ class Lotto:
 
                 messagebox.showinfo(title="Play!", message="Lets Play!")
                 root.destroy()
-                import win
+                import lotto_window
             elif int(self.year2) > 3 and int(self.year2) > 21:
                 messagebox.showinfo(title="Grab Your Millions", message="Are You Ready!! Let's dive in and Play!!")
                 root.destroy()
-                import win
+                import lotto_window
+
             else:
                 messagebox.showinfo(title="Under Age", message="Your are too young to play")
         except ValueError:
