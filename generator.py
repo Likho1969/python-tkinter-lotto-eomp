@@ -23,10 +23,17 @@ class LottoGenerator:
     def __init__(self):
             self.head_label = tk.Label(text="Panda, Pusha , Play.", bg="green")
             self.head_label.place(x=270, y=10)
-            self.output = tk.Label(text="", width="30", height="2")
-            self.output.place(x=380, y=200)
 
-           # creating buttons
+            self.output = Label(text="", width="30", height="2")
+            self.output.place(x=380, y=140)
+            self.output = Label(text="", width="30", height="2")
+            self.output.place(x=380, y=185)
+            self.output = Label(text="", width="30", height="2")
+            self.output.place(x=380, y=230)
+            self.number_label = Label(root, text="Your numbers")
+            self.number_label.place(x=380, y=100)
+
+            # creating buttons
             self.btn1 = Button(text="1")
             self.btn1.place(x=10, y=100)
             self.btn2 = Button(text="2")
@@ -133,53 +140,12 @@ class LottoGenerator:
             self.btn12 = Button(text="49", width="1")
             self.btn12.place(x=10, y=420)
 
-            self.btn12 = Button(text="Play", width="5", font="20", command=self.lucky_draw)
+            self.btn12 = Button(text="Play", width="5", font="20")
             self.btn12.place(x=10, y=500)
             self.btn12 = Button(text="Clear", width="5", font="20")
             self.btn12.place(x=100, y=500)
-            self.btn12 = Button(text="Exit", width="5", font="20")
+            self.btn12 = Button(text="Exit", width="5", borderwidth=6, font="20")
             self.btn12.place(x=200, y=500)
-
-    def lucky_draw(self):
-            x = self.num1.get()
-            y = self.num2.get()
-            z = self.num3.get()
-            a = self.num4.get()
-            b = self.num5.get()
-            c = self.num6.get()
-
-            self.my_list = [x, y, z, a, b, c]
-            self.my_list.sort()
-
-            self.todaylotto = sorted(random.sample(range(1, 49), 6))
-
-            if any(self.my_list) < 0 or any(self.my_list) < 50:
-                messagebox.showinfo("hurray", "Get ready")
-
-                if len(self.todaylotto) == len(self.my_list):
-                    self.same = set(self.todaylotto).intersection(set(self.my_list))
-                    if len(self.same) == 6:
-                        self.result_answer.config(text="Jackpot Hurray \n" + "You just got your self Price : R10, 000 000.00" + "\n Today Lotto Numbers are" + str(self.todaylotto))
-                    elif len(self.same) == 5:
-                        self.result_answer.config(text="Felicitations: " + "You got 5 numbers correct" + "\n With this Outstanding Achievement" + "You won yourself R8, 584.00" + "\n Today Lotto Numbers are" + str(self.todaylotto))
-                    elif len(self.same) == 4:
-                        self.result_answer.config(text="Felicitations: " + "You got 4 numbers correct" + "\n With this Meritorious Achievement" + "You won yourself R2, 384.00" + "\n Today Lotto Numbers are" + str(self.todaylotto))
-                    elif len(self.same) == 3:
-                        self.result_answer.config(text="Felicitations: " + "You got 3 numbers correct" + "\n With this Substantial Achievement" + "You won yourself R100.50" + "\n Today Lotto Numbers are" + str(self.todaylotto))
-                    elif len(self.same) == 2:
-                        self.result_answer.config(text="Felicitations: " + "You got 2 numbers correct" + "\n With this Adequate Achievement" + "You won yourself R20.00" + "\n Today Lotto Numbers are" + str(self.todaylotto))
-                    elif len(self.same) == 1:
-                        messagebox.showinfo("RESULT", "We are sorry you only got one correct lotto numbers are: " + str(self.todaylotto))
-                    elif len(self.same) == 0:
-                        messagebox.showinfo("RESULT", "Try again Lotto numbers : " + str(self.todaylotto))
-            else:
-                messagebox.showinfo("Oops", "Follow the rules")
-                self.num1.delete(0, tk.END)
-                self.num2.delete(0, tk.END)
-                self.num3.delete(0, tk.END)
-                self.num4.delete(0, tk.END)
-                self.num5.delete(0, tk.END)
-                self.num6.delete(0, tk.END)
 
 
 if __name__ == '__main__':
