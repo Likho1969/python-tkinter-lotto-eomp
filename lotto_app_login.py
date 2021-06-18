@@ -6,7 +6,7 @@ from PIL import Image, ImageTk
 import rsaidnumber
 
 root = Tk()
-root.title("Ithuba National Lottery")
+root.title("Ithuba National Lottery Login")
 root.geometry("2560x1536")
 root.geometry("2560x1536")
 loader = Image.open("powerball-jackpot-2048x1365.jpg")
@@ -23,41 +23,41 @@ class Lotto:
     def __init__(self, window):
         # labels& entries
 
-        self.name = tk.Label(window, text="FULL NAME", fg="black", bg="green", font=("bold", 18))
+        self.name = tk.Label(window, text="FULL NAME", fg="black", bg="green", font=("sans-serif bold", 18))
         self.name.place(x=300, y=400)
 
-        self.name_entry = Entry(window, width=24, fg="green", bg="yellow", font=("bold", 18))
+        self.name_entry = Entry(window, width=24, fg="green", bg="yellow", font=("sans-serif bold", 18))
         self.name_entry.place(x=500, y=400)
 
-        self.email_l = Label(window, text="EMAIL ADDRESS", fg="black", bg="green", font=("bold", 18))
+        self.email_l = Label(window, text="EMAIL ADDRESS", fg="black", bg="green", font=("sans-serif bold", 18))
         self.email_l.place(x=250, y=452)
 
-        self.email_entry = Entry(window, width=24, fg="green", bg="yellow", font=("bold", 18))
+        self.email_entry = Entry(window, width=24, fg="green", bg="yellow", font=("sans-serif bold", 18))
         self.email_entry.place(x=500, y=450)
 
-        self.address_l = Label(window, text="HOME ADDRESS", fg="black", bg="green", font=("bold", 18))
+        self.address_l = Label(window, text="HOME ADDRESS", fg="black", bg="green", font=("sans-serif bold", 18))
         self.address_l.place(x=250, y=512)
 
-        self.address_entry = Text(window, width=24, fg="green", bg="yellow", height=6, font=("bold", 18))
+        self.address_entry = Text(window, width=24, fg="green", bg="yellow", height=6, font=("sans-serif bold", 18))
         self.address_entry.place(x=500, y=510)
 
         self.id_no = IntVar()
 
-        self.id_no_l = Label(window, text="ID NUMBER", width=12, fg="black", bg="green", font=("bold", 18))
+        self.id_no_l = Label(window, text="ID NUMBER", width=12, fg="black", bg="green", font=("sans-serif bold", 18))
         self.id_no_l.place(x=250, y=720)
 
-        self.id_entry = Entry(window, textvariable=self.id_no, width=24, fg="green", bg="yellow", font=("bold", 18))
+        self.id_entry = Entry(window, textvariable=self.id_no, width=24, fg="green", bg="yellow", font=("sans-serif bold", 18))
         self.id_entry.place(x=500, y=720)
 
         # button
 
-        self.btn = Button(window, text="LOGIN", bg="green", fg="white", borderwidth="6", command=self.id_check)
+        self.btn = Button(window, text="LOGIN", bg="green", fg="white", borderwidth="6", font=("sans-serif bold", 18), command=self.id_check)
         self.btn.place(x=400, y=800)
 
-        self.btn = Button(window, text="LOGOUT", bg="red", fg="white", borderwidth="6", command=self.close)
+        self.btn = Button(window, text="LOGOUT", bg="red", fg="white", borderwidth="6", font=("sans-serif bold", 18), command=self.close)
         self.btn.place(x=550, y=800)
 
-        self.btn = Button(window, text="CLEAR", bg="green", fg="white", borderwidth="6", command=self.clear)
+        self.btn = Button(window, text="CLEAR", bg="green", fg="white", borderwidth="6", font=("sans-serif bold", 18), command=self.clear)
         self.btn.place(x=720, y=800)
 
     def id_check(self):
@@ -74,11 +74,11 @@ class Lotto:
 
                 messagebox.showinfo(title="Play!", message="Lets Play!")
                 root.destroy()
-                import lotto_window
+                import lotto_generator
             elif int(self.year2) > 3 and int(self.year2) > 21:
                 messagebox.showinfo(title="Grab Your Millions", message="Are You Ready!! Let's dive in and Play!!")
                 root.destroy()
-                import lotto_window
+                import lotto_generator
 
             else:
                 messagebox.showinfo(title="Under Age", message="Your are too young to play")
