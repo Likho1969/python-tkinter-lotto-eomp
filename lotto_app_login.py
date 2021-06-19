@@ -51,7 +51,7 @@ class Lotto:
 
         # button
 
-        self.btn = Button(window, text="LOGIN", bg="green", fg="white", borderwidth="6", font=("sans-serif bold", 18), command=self.id_check)
+        self.btn = Button(window, text="LOGIN", bg="green", fg="white", borderwidth="6", font=("sans-serif bold", 18), command=self.id_validation)
         self.btn.place(x=400, y=800)
 
         self.btn = Button(window, text="LOGOUT", bg="red", fg="white", borderwidth="6", font=("sans-serif bold", 18), command=self.close)
@@ -60,7 +60,7 @@ class Lotto:
         self.btn = Button(window, text="CLEAR", bg="green", fg="white", borderwidth="6", font=("sans-serif bold", 18), command=self.clear)
         self.btn.place(x=720, y=800)
 
-    def id_check(self):
+    def id_validation(self):
         try:
             self.id_no = int(self.id_entry.get())
             self.id_ls = self.id_entry.get()
@@ -104,10 +104,29 @@ class Lotto:
             root.destroy()
 
     def clear(self):
-        self.name_entry.delete(0)
-        self.email_entry.delete(0)
-        self.address_entry.delete(0)
-        self.id_entry.delete(0)
+        self.query = messagebox.askquestion("ITHUBA National Lottery", "Do you really want to clear the entry(ies)?")
+        if self.query == "yes":
+            self.name_entry.delete(0)
+            self.email_entry.delete(0)
+            self.address_entry.delete(0)
+            self.id_entry.delete(0)
+
+    def bank_account(self):
+         try:
+            self.name = self.name_entry.get()
+            self.email = self.email_entry.get()
+            self.address = self.address_entry.get()
+            self.id_fig = self.id_entry.get()
+            if len(self.name) == self.name_entry and len(self.email) == self.email_entry and len(self.address) == self.address_entry and len(self.id_fig) == self.id_entry:
+                 self.details_file = open("ithuba_details_file.txt", "a+")
+                 self.details_file.write(
+                       self.name_entry.get() + " " + self.email_entry.get() + " " + self.address_entry.get() + " " + self.id_entry.get() + "\n")
+                 self.details_file.close()
+                 messagebox.showinfo("Successful", "Please Check Your Email For Further Instructions")
+            else:
+                messagebox.showinfo("Failed", "You are Kindly Advised to Please Enter A 11 Digit Bank Account Number and A 6 Digit Branch Code")
+         except ValueError(str):
+            messagebox.showinfo("Invalid", "You are kindly Advised to Please Utilize Digits Only")
 
 
 if __name__ == '__main__':
