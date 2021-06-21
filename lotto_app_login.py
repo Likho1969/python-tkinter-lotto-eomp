@@ -4,7 +4,6 @@ from tkinter import *
 import tkinter as tk
 from tkinter import messagebox
 from PIL import Image, ImageTk
-import rsaidnumber
 from playsound import playsound
 
 root = tk.Tk()    # create window
@@ -76,8 +75,6 @@ class Lotto:
 
             self.year = self.id_entry.get()
             self.year2 = self.id_entry.get()
-
-            self.id_number = rsaidnumber.parse(self.id_entry.get())
 
             self.ithuba_file = open('ithuba_details_file.txt', 'a+')
             self.ithuba_file.write("Player Name: " + self.name_entry.get() + "| Player Email: " + self.email_entry.get() + "| Player ID: " + str(self.id_entry.get()) + "\n",)
