@@ -5,6 +5,7 @@ from tkinter.ttk import Combobox
 from PIL import ImageTk, Image
 from tkinter import messagebox
 from playsound import playsound
+import smtplib
 
 
 root = tk.Tk()
@@ -86,10 +87,11 @@ class Bank:
             if len(self.bank_fig) == 11 and len(self.branch) == 6:
                  self.details_file = open("ithuba_details_file.txt", "a+")
                  self.details_file.write(
-                       self.account_name_entry.get() + " " + self.account_fig_entry.get() + " " + self.branch_fig_entry.get() + " " + self.bank_combobox.get() + "\n")
+                       "* Account Name Holder: " + self.account_name_entry.get() + " " + "| Player Account Number: " + self.account_fig_entry.get() + " " + "| Bank Branch Code: " + self.branch_fig_entry.get() + "| Player Bank Type: " + self.bank_combobox.get() + "\n")
                  self.details_file.close()
-                 playsound('button-4.mp3')
+                 playsound('click.mp3')
                  messagebox.showinfo("Successful", "Please Check Your Email For Further Instructions")
+
             else:
                 playsound('beep-05.mp3')
                 messagebox.showinfo("Failed", "You are Kindly Advised to Please Enter A 11 Digit Bank Account Number and A 6 Digit Branch Code")

@@ -168,16 +168,22 @@ class Play:
                 self.lotto += 1
         if self.lotto <= 1:
             messagebox.showinfo("Hard Luck!, Try Again", str(self.lotto) + " " + "Numbers" + "\n" + "Your Winnings Are:" + self.player_winnings[0])
+            playsound("small-win.mp3")
         elif self.lotto == 2:
             messagebox.showinfo("Congratulations!", str(self.lotto) + " " + "Numbers" + "\n" + "Your Winnings Are:" + self.player_winnings[1])
+            playsound("small-win.mp3")
         elif self.lotto == 3:
             messagebox.showinfo("Congratulations!", str(self.lotto) + " " + "Numbers" + "\n" + "Your Winnings Are:" + self.player_winnings[2])
+            playsound("small-jackpot.mp3")
         elif self.lotto == 4:
             messagebox.showinfo("Congratulations!", str(self.lotto) + " " + "Numbers" + "\n" + "Your Winnings Are:" + self.player_winnings[3])
+            playsound("jackpot2.mp3")
         elif self.lotto == 5:
             messagebox.showinfo("Felicitations!", str(self.lotto) + " " + "Numbers" + "\n" + "Your Winnings Are:" + self.player_winnings[4])
+            playsound("jackpot2.mp3")
         elif self.lotto == 6:
             messagebox.showinfo("felicitations!", str(self.lotto) + " " + "Numbers" + "\n" + "Your Winnings Are:" + self.player_winnings[5])
+            playsound("jackpot.mp3")
         return self.lotto_figs
 
     def account_details(self):
@@ -189,7 +195,7 @@ class Play:
         if self.question == "yes":
             messagebox.showinfo("Disclaimer", "You Are Advised to Kindly Please Enter Your Bank Details In The Next Window")
             root.destroy()
-            import Bank
+            import bank
 
     def currency_convertor(self):
         try:
