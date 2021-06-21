@@ -1,3 +1,4 @@
+# Likho Kapesi
 
 from tkinter import *
 import tkinter as tk
@@ -17,6 +18,9 @@ img.place(x=0, y=0)
 
 
 class Play:
+
+    """Generating Lotto"""
+
     def __init__(self):
         self.lotteries = tk.Label(root, text="WALALA WASALA!! PHANDA PHUSHA PLAY!!", font=("bold", 20), bg="green", fg="black", height=2)
         self.lotteries.place(x=600, y=10)

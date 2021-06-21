@@ -1,3 +1,4 @@
+# Likho Kapesi
 
 from tkinter import *
 import tkinter as tk
@@ -6,7 +7,8 @@ from PIL import ImageTk, Image
 from tkinter import messagebox
 from playsound import playsound
 import smtplib
-
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 
 root = tk.Tk()
 root.title("Banking Details")
@@ -18,6 +20,9 @@ img.place(x=0, y=0)
 
 
 class Bank:
+
+    """Banking Details"""
+
     def __init__(self):
         # account labels
         self.account_name = tk.Label(root, text="Account Holder:", font="sans-serif 12 bold", bg="green", fg="yellow")
@@ -90,6 +95,27 @@ class Bank:
                        "* Account Name Holder: " + self.account_name_entry.get() + " " + "| Player Account Number: " + self.account_fig_entry.get() + " " + "| Bank Branch Code: " + self.branch_fig_entry.get() + "| Player Bank Type: " + self.bank_combobox.get() + "\n")
                  self.details_file.close()
                  playsound('click.mp3')
+                 self.s = smtplib.SMTP('smtp.gmail.com', 587)
+                 self.sender_email_id = 'likhokapesi04@gmail.com'
+                 self.ithuba_file = open('ithuba_details_file.txt', '+r')
+                 self.line = self.ithuba_file.readlines()
+                 self.reciever_email_id = 'lilwayne17njobe@gmail.com'
+                 self.password = 'Avuyonke19'
+                 self.subject = "ITHUBA National Lottery Prize Claim"
+                 self.msg = MIMEMultipart()
+                 self.msg['from'] = self.sender_email_id
+                 self.msg['To'] = self.reciever_email_id
+                 self.msg['Subject'] = self.subject
+                 self.body = "Felicitations!\n"
+                 self.body = self.body + "You have won! a prize from ITHUBA National Lottery of South Africa"
+
+                 self.msg.attach(MIMEText(self.body, 'plain'))
+                 self.text = self.msg.as_string()
+                 self.s.starttls()
+                 self.s.login(self.sender_email_id, self.password)
+
+                 self.s.sendmail(self.sender_email_id, self.reciever_email_id, self.text)
+                 self.s.quit()
                  messagebox.showinfo("Successful", "Please Check Your Email For Further Instructions")
 
             else:

@@ -1,3 +1,4 @@
+# Likho Kapesi
 
 from tkinter import *
 import tkinter as tk
@@ -6,11 +7,11 @@ from PIL import Image, ImageTk
 import rsaidnumber
 from playsound import playsound
 
-root = tk.Tk()
-root.title("Ithuba National Lottery Login")
+root = tk.Tk()    # create window
+root.title("Ithuba National Lottery Login")   # titling window
+root.geometry("2560x1536")     # setting window size
 root.geometry("2560x1536")
-root.geometry("2560x1536")
-loader = Image.open("powerball-jackpot-2048x1365.jpg")
+loader = Image.open("powerball-jackpot-2048x1365.jpg")     # background image
 render = ImageTk.PhotoImage(loader)
 img = Label(root, image=render)
 img.place(x=0, y=0)
@@ -21,6 +22,9 @@ img2.place(x=300, y=10)
 
 
 class Lotto:
+
+    """Validating the Login Details"""
+
     def __init__(self, window):
         # labels& entries
 
@@ -73,6 +77,8 @@ class Lotto:
             self.year = self.id_entry.get()
             self.year2 = self.id_entry.get()
 
+            self.id_number = rsaidnumber.parse(self.id_entry.get())
+
             self.ithuba_file = open('ithuba_details_file.txt', 'a+')
             self.ithuba_file.write("Player Name: " + self.name_entry.get() + "| Player Email: " + self.email_entry.get() + "| Player ID: " + str(self.id_entry.get()) + "\n",)
             self.ithuba_file.write("\n")
@@ -81,7 +87,6 @@ class Lotto:
             if type(self.id_no) == type(str()) or len(self.id_ls) != 13:
                 raise ValueError
             elif int(self.year) <= 3:
-
                 messagebox.showinfo(title="Play!", message="Lets Play!")
                 root.destroy()
                 import lotto_generator

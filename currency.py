@@ -1,20 +1,9 @@
-
-import smtplib
-from tkinter import *
-
-
-s = smtplib.SMTP('smtp.gmail.com', 587)
-sender_email_id = 'likhokapesi04@gmail.com'
-receiver_email_id = ['godwin@lifechoices.co.za', 'thapelo@lifechoices.gmail.co.za', 'fullstackdeveloper1969@gmail.com', 'likhokapesi135@gmail.com']
-password = input("Enter senders email password: ")
-# start TLS for security
-s.starttls()
-# Authentication
-s.login(sender_email_id, password)
-# message to be sent
-message = "Felicitations!\n"
-message = message + "you have won! a prize from ITHUBA National Lottery of South Africa"
-# sending the mail
-s.sendmail(sender_email_id, receiver_email_id, message)
-# terminating the session
-s.quit()
+ def claim():
+            if earnings[len(winnings1)] >=2 or earnings[len(winnings2)] >=2 or earnings[len(winnings3)] >= 2:
+                bank_details()
+                text_file = open("PlayerID.txt", '+a')
+                text_file.write(
+                    "\nEntry 1 winning numbers : " + str() + "\nEntry 2 winning numbers : " + str(entry2) + "\nEntry 3 winning numbers : " + str(entry3))
+                text_file.close()
+            else:
+             messagebox.showerror("Error", "You do not have any winnings to claim")
