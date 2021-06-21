@@ -4,6 +4,7 @@ import tkinter as tk
 from tkinter.ttk import Combobox
 from PIL import ImageTk, Image
 from tkinter import messagebox
+from playsound import playsound
 
 
 root = tk.Tk()
@@ -58,12 +59,20 @@ class Bank:
 
         # exit function
     def exit_program(self):
+        try:
+         playsound('button-4.mp3')
+        except:
+            print("Unrecognized audio format")
         self.query = messagebox.askquestion("Ithuba National Lottery", "Are you sure you want to exit the app")
         if self.query == "yes":
             return root.destroy()
 
     # clear function
     def clear_input(self):
+        try:
+         playsound('click.mp3')
+        except:
+            print("Unrecognized audio format")
         self.ask = messagebox.askquestion("Clear Entries", "Do you want to clear the entries?")
         if self.ask == "yes":
             self.account_name_entry.delete(0, END)
@@ -79,13 +88,19 @@ class Bank:
                  self.details_file.write(
                        self.account_name_entry.get() + " " + self.account_fig_entry.get() + " " + self.branch_fig_entry.get() + " " + self.bank_combobox.get() + "\n")
                  self.details_file.close()
+                 playsound('button-4.mp3')
                  messagebox.showinfo("Successful", "Please Check Your Email For Further Instructions")
             else:
+                playsound('beep-05.mp3')
                 messagebox.showinfo("Failed", "You are Kindly Advised to Please Enter A 11 Digit Bank Account Number and A 6 Digit Branch Code")
          except ValueError(str):
             messagebox.showinfo("Invalid", "You are kindly Advised to Please Utilize Digits Only")
 
     def play_again(self):
+        try:
+         playsound('button_click_006_53867.mp3')
+        except:
+            print("Unrecognized audio format")
         self.question = messagebox.askquestion("ITHUBA National Lottery", "Do you want to TRY ANOTHER LUCK?")
         if self.question == "yes":
             root.destroy()

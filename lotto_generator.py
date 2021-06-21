@@ -4,7 +4,7 @@ import tkinter as tk
 import random
 from tkinter import messagebox
 from PIL import Image, ImageTk
-from random import sample
+from playsound import playsound
 
 
 root = tk.Tk()
@@ -65,26 +65,17 @@ class Play:
         self.player_fig_entry18 = tk.Entry(root, width=5, bg="yellow")
         self.player_fig_entry18.place(x=490, y=360)
 
-        # instructions
-        self.game_rules = tk.Label(root, text='Instructions:', bg="green", font="sans-serif 12 bold")
-        self.game_rules .place(x=5, y=180)
-        self.game_rules1 = tk.Label(root, text='1. You have up to 3 sets to enter 6 different numbers', bg="lime", font="sans-serif 12 bold", fg="black")
-        self.game_rules1.place(x=5, y=200)
-        self.game_rules2 = tk.Label(root, text='2. You have to choose 6 different numbers ranging from 1-49', bg="lime", font="sans-serif 12 bold", fg="black")
-        self.game_rules2.place(x=5, y=220)
-        self.game_rules3 = tk.Label(root, text='3. Click Check Numbers to view the winning Lotto Numbers', bg="lime", font="sans-serif 12 bold", fg="black")
-        self.game_rules3.place(x=5, y=242)
-
+        # Disclaimer
         self.app_disclaimer = tk.Label(root, text='Disclaimer:', bg="red2", font="sans-serif 12 bold")
-        self.app_disclaimer.place(x=700, y=180)
+        self.app_disclaimer.place(x=5, y=180)
         self.app_disclaimer1 = tk.Label(root, text='Although ITHUBA takes every care to ensure the accuracy of information containing the National Lottery results, ITHUBA', bg="orangered", font="sans-serif 12 bold", fg="black")
-        self.app_disclaimer1.place(x=700, y=200)
+        self.app_disclaimer1.place(x=5, y=200)
         self.app_disclaimer2 = tk.Label(root, text='cannot take any responsibility  for any errors, mistakes or omissions contained herein. ', bg="orangered", font="sans-serif 12 bold", fg="black")
-        self.app_disclaimer2.place(x=700, y=220)
+        self.app_disclaimer2.place(x=5, y=220)
         self.app_disclaimer3 = tk.Label(root, text="The National Lottery results contained in the official records maintained by ITHUBA's ", bg="orangered", font="sans-serif 12 bold", fg="black")
-        self.app_disclaimer3.place(x=700, y=242)
+        self.app_disclaimer3.place(x=5, y=242)
         self.app_disclaimer4 = tk.Label(root, text="Central Lottery system will prevail and all games Rules and Regulations shall be applicable.", bg="orangered", font="sans-serif 12 bold", fg="black")
-        self.app_disclaimer4.place(x=700, y=262)
+        self.app_disclaimer4.place(x=5, y=262)
 
         # button
         self.lotto_btn = tk.Button(root, text="Play / Play Again", bg="lime", font="sans-serif 12 bold", borderwidth="3", fg="black", highlightthickness=0, command=self.lotto_figs)
@@ -152,6 +143,10 @@ class Play:
         return list_3
 
     def lotto_figs(self):
+        try:
+         playsound('button_click_006_53867.mp3')
+        except:
+            print("Unrecognized audio format")
         self.lotto_list1.append(int(self.player_fig_entry.get()))
         self.lotto_list1.append(int(self.player_fig_entry3.get()))
         self.lotto_list1.append(int(self.player_fig_entry4.get()))
@@ -172,7 +167,7 @@ class Play:
             if x in self.lotto_list1:
                 self.lotto += 1
         if self.lotto <= 1:
-            messagebox.showinfo("Bad Luck!", str(self.lotto) + " " + "Numbers" + "\n" + "Your Winnings Are:" + self.player_winnings[0])
+            messagebox.showinfo("Hard Luck!, Try Again", str(self.lotto) + " " + "Numbers" + "\n" + "Your Winnings Are:" + self.player_winnings[0])
         elif self.lotto == 2:
             messagebox.showinfo("Congratulations!", str(self.lotto) + " " + "Numbers" + "\n" + "Your Winnings Are:" + self.player_winnings[1])
         elif self.lotto == 3:
@@ -180,12 +175,16 @@ class Play:
         elif self.lotto == 4:
             messagebox.showinfo("Congratulations!", str(self.lotto) + " " + "Numbers" + "\n" + "Your Winnings Are:" + self.player_winnings[3])
         elif self.lotto == 5:
-            messagebox.showinfo("Congratulations!", str(self.lotto) + " " + "Numbers" + "\n" + "Your Winnings Are:" + self.player_winnings[4])
+            messagebox.showinfo("Felicitations!", str(self.lotto) + " " + "Numbers" + "\n" + "Your Winnings Are:" + self.player_winnings[4])
         elif self.lotto == 6:
-            messagebox.showinfo("Congratulations!", str(self.lotto) + " " + "Numbers" + "\n" + "Your Winnings Are:" + self.player_winnings[5])
+            messagebox.showinfo("felicitations!", str(self.lotto) + " " + "Numbers" + "\n" + "Your Winnings Are:" + self.player_winnings[5])
         return self.lotto_figs
 
     def account_details(self):
+        try:
+         playsound('button_click_006_53867.mp3')
+        except:
+            print("Unrecognized audio format")
         self.question = messagebox.askquestion("Ithuba National Lottery", "Do you wish to claim your winnings?")
         if self.question == "yes":
             messagebox.showinfo("Disclaimer", "You Are Advised to Kindly Please Enter Your Bank Details In The Next Window")
@@ -193,6 +192,10 @@ class Play:
             import Bank
 
     def currency_convertor(self):
+        try:
+         playsound('button_click_006_53867.mp3')
+        except:
+            print("Unrecognized audio format")
         self.ask = messagebox.askquestion("Ithuba National Lottery", "Do you wish to convert your winnings?")
         if self.ask == "yes":
             messagebox.showinfo("Successful", "Hi Player, welcome to Ithuba National Lottery Currency Converter")
@@ -200,6 +203,10 @@ class Play:
             import currency
 
     def clear(self):
+        try:
+         playsound('click.mp3')
+        except:
+            print("Unrecognized audio format")
         self.enquiry = messagebox.askquestion("Ithuba National Lottery - Lotto Generator", "Do you really want to clear the entry(ies)?")
         if self.enquiry == "yes":
             self.player_fig_entry.delete(0, END)
@@ -228,6 +235,10 @@ class Play:
             self.lotto_num_lbl6.config(text='', bg="lime")
 
     def close(self):
+        try:
+         playsound('button-4.mp3')
+        except:
+            return "Unrecognized audio format"
         self.query = messagebox.askquestion("Ithuba National Lottery - Lotto Generator", "Do you really want to close the app?")
         if self.query == "yes":
             root.destroy()

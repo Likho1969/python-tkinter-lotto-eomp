@@ -4,6 +4,7 @@ import tkinter as tk
 from tkinter import messagebox
 from PIL import Image, ImageTk
 import rsaidnumber
+from playsound import playsound
 
 root = Tk()
 root.title("Ithuba National Lottery Login")
@@ -62,11 +63,21 @@ class Lotto:
 
     def id_validation(self):
         try:
+         playsound('button_click_006_53867.mp3')
+        except:
+            print("Unrecognized audio format")
+        try:
             self.id_no = int(self.id_entry.get())
             self.id_ls = self.id_entry.get()
 
             self.year = self.id_entry.get()
             self.year2 = self.id_entry.get()
+
+            self.ithuba_file = open('ithuba_details_file.txt', 'a+')
+            self.ithuba_file.write("Player Name: " + self.name_entry.get() + ", Player Email: " + self.email_entry.get() +
+                                       ", Player ID: " + str(self.id_entry.get()) + "\n",)
+            self.ithuba_file.write("\n")
+            self.ithuba_file.close()
 
             if type(self.id_no) == type(str()) or len(self.id_ls) != 13:
                 raise ValueError
@@ -99,34 +110,25 @@ class Lotto:
             self.email_entry.delete(0, END)
 
     def close(self):
+        try:
+         playsound('button-4.mp3')
+        except:
+            print("Unrecognized audio format")
         self.ask = messagebox.askquestion("Ithuba National Lottery", "Do you really want to LOGOUT of the app?")
         if self.ask == 'yes':
             root.destroy()
 
     def clear(self):
+        try:
+         playsound('click.mp3')
+        except:
+            print("Unrecognized audio format")
         self.query = messagebox.askquestion("ITHUBA National Lottery", "Do you really want to clear the entry(ies)?")
         if self.query == "yes":
-            self.name_entry.delete(0)
-            self.email_entry.delete(0)
-            self.address_entry.delete(0)
-            self.id_entry.delete(0)
-
-    def bank_account(self):
-         try:
-            self.name = self.name_entry.get()
-            self.email = self.email_entry.get()
-            self.address = self.address_entry.get()
-            self.id_fig = self.id_entry.get()
-            if len(self.name) == self.name_entry and len(self.email) == self.email_entry and len(self.address) == self.address_entry and len(self.id_fig) == self.id_entry:
-                 self.details_file = open("ithuba_details_file.txt", "a+")
-                 self.details_file.write(
-                       self.name_entry.get() + " " + self.email_entry.get() + " " + self.address_entry.get() + " " + self.id_entry.get() + "\n")
-                 self.details_file.close()
-                 messagebox.showinfo("Successful", "Please Check Your Email For Further Instructions")
-            else:
-                messagebox.showinfo("Failed", "You are Kindly Advised to Please Enter A 11 Digit Bank Account Number and A 6 Digit Branch Code")
-         except ValueError(str):
-            messagebox.showinfo("Invalid", "You are kindly Advised to Please Utilize Digits Only")
+            self.name_entry.delete(0, END)
+            self.email_entry.delete(0, END)
+            self.address_entry.delete(END)
+            self.id_entry.delete(0, END)
 
 
 if __name__ == '__main__':
