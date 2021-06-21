@@ -31,6 +31,8 @@ class Bank:
         self.account_fig.place(x=300, y=230)
         self.branch_fig = tk.Label(root, text="Branch Code:", font="sans-serif 12 bold", bg="green", fg="yellow")
         self.branch_fig.place(x=300, y=280)
+        self.email = tk.Label(root, text="Email Address:", font="sans-serif 12 bold", bg="green", fg="yellow")
+        self.email.place(x=300, y=390)
         self.type_of_bank = tk.Label(root, text="Choose Your Bank:", font="sans-serif 12 bold", bg="green", fg="yellow")
         self.type_of_bank.place(x=300, y=330)
 
@@ -41,6 +43,8 @@ class Bank:
         self.account_fig_entry.place(x=500, y=230)
         self.branch_fig_entry = tk.Entry(root, bg="yellow", fg="black")
         self.branch_fig_entry.place(x=500, y=280)
+        self.email_entry = tk.Entry(root, bg="yellow", fg="black")
+        self.email_entry.place(x=500, y=390)
 
         # ComboBox
         self.bank_combobox = Combobox(root)
@@ -84,11 +88,13 @@ class Bank:
             self.account_name_entry.delete(0, END)
             self.account_fig_entry.delete(0, END)
             self.branch_fig_entry.delete(0, END)
+            self.email_entry.delete(0, END)
 
     def bank_account(self):
          try:
             self.bank_fig = self.account_fig_entry.get()
             self.branch = self.branch_fig_entry.get()
+            self.em = self.email_entry.get()
             if len(self.bank_fig) == 11 and len(self.branch) == 6:
                  self.details_file = open("ithuba_details_file.txt", "a+")
                  self.details_file.write(
@@ -99,7 +105,7 @@ class Bank:
                  self.sender_email_id = 'likhokapesi04@gmail.com'
                  self.ithuba_file = open('ithuba_details_file.txt', '+r')
                  self.line = self.ithuba_file.readlines()
-                 self.reciever_email_id = 'lilwayne17njobe@gmail.com'
+                 self.reciever_email_id = self.email_entry.get()
                  self.password = 'Avuyonke19'
                  self.subject = "ITHUBA National Lottery Prize Claim"
                  self.msg = MIMEMultipart()
