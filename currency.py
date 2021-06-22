@@ -1,71 +1,98 @@
-
 from tkinter import *
 from tkinter import messagebox
+from tkinter import ttk
 import requests
-from PIL import Image,ImageTk
-
+# from tkinter import messagebox
 
 root = Tk()
-root.title("ITHUBA National Lottery Currency Converter")
-root.geometry("1024x819")
 
-img = Image.open("time-currency-s.jpg")
-render = ImageTk.PhotoImage(img)
+# StringVar
+results = StringVar()
+values1 = StringVar()
+values2 = StringVar()
 
-img = Label(root, image=render)
-img.image = render
-img.place(x=0, y=0)
+# code to add widgets and style window will go here
 
-abc = StringVar()
-abc.set("Default Currency is USD$")
+information = requests.get('https://v6.exchangerate-api.com/v6/89dcd9e8cc7777ded2575ce1/latest/USD')
+information_json = information.json()
 
-req = requests.get(" https://v6.exchangerate-api.com/v6/7dba7e6bf61ba339ff735e21/latest/USD")
-print(req.json())
+conversion_rates = information_json['conversion_rates']
 
-l1 = Label(root, text="Winnings", font="sans-serif 12 bold", bg="green", fg="yellow")
-l1.place(x=100, y=300)
+currency = []
+for i in conversion_rates.keys():
+    currency.append(i)
 
-entry1 = Entry(root)
-entry1.place(x=200, y=300)
+currency2 = []
+for i in conversion_rates.keys():
+    currency2.append(i)
 
-
-btn_active = Button(root, text="Convert", font="sans-serif 12 bold", bg="green", fg="yellow", command=req)
-btn_active.grid(row=3, column=2)
-
-l2 = Label(root, text="Current Currency", font="sans-serif 12 bold", bg="green", fg="yellow")
-l2.grid(row=2, column=5)
-
-entry2 = Entry(root, state="readonly", textvariable=abc)
-entry2.grid(row=4, column=5, pady=10)
+currency_cb = ttk.Combobox(root)
+currency_cb['values'] = currency
+currency_cb['state'] = 'readonly'
+currency_cb.set('Select Currency')
+currency_cb.place(x=10, y=280)
 
 
-# defining function that will exit/ close the window/ program
-def close():
-    query = messagebox.askquestion("ITHUBA National Lottery", "Are you sure you want to exit this procedure?")
-    if query == "yes":
-        root.destroy()
+currency_cb2 = ttk.Combobox(root)
+currency_cb2['values'] = currency2
+currency_cb2['state'] = 'readonly'
+currency_cb2.set('Select Currency')
+currency_cb2.place(x=253, y=280)
 
 
-# exit button
-exit_btn = Button(text="Exit Program", command=close)
-exit_btn.grid(row=9, column=5)
+Label(root, text='Enter Amount:', bg='#00A868').place(x=65, y=330)
+ent1 = Entry(root, bg='white')
+ent1.place(x=200, y=330)
+ent1.focus()
+Label(root, text='Converted Amount:', bg='#00A868').place(x=65, y=380)
+Label(root, text='', textvariable=results, bg='#00A868').place(x=200, y=380)
 
-# results shown here
-result_entry = Entry(root)
-result_entry.grid(row=9, column=2)
+
+def convert(from_currency, to_currency, amount):
+    # first convert it into USD if it is not in USD.
+    # because our base currency is USD
+    if from_currency != 'USD':
+        amount = amount / conversion_rates[from_currency]
+
+    amount = round(amount * conversion_rates[to_currency], 4)
+    return amount
 
 
-# defining function that will delete the figure in the Entry box
+def perform():
+    try:
+        amount = float(ent1.get())
+        from_curr = currency_cb.get()
+        to_curr = currency_cb2.get()
+
+        converted_amount = convert(from_curr, to_curr, amount)
+
+        results.set(converted_amount)
+    except ValueError:
+        if ent1 != int and ent1 != float:
+            messagebox.showerror('Entry not valid', 'Enter numbers only')
+
+    except requests.exceptions.ConnectionError:
+        messagebox.showerror('Internet error', 'Internet Bad')
+    except KeyError:
+        messagebox.showerror('ERROR!!!!!!!!!!!!!!!', 'Select Currency')
+
+
+# kill program
+def kill():
+    return root.destroy()
+
+
 def clear():
-    entry1.delete(0)
-    entry2.delete(0)
-    result_entry.delete(0)
+    currency_cb.set('Select Currency')
+    currency_cb2.set('Select Currency')
+    ent1.delete(0, END)
+    ent1.focus()
+    results.set('')
 
 
-# creating the Clear button and calling the clear()
-clear_btn = Button(root, text="Clear", command=clear)
-clear_btn.grid(row=9, column=1)
+Button(root, text="CONVERT", borderwidth=3, bg='white', command=perform).place(x=180, y=430)
+Button(root, text="EXIT", borderwidth=3, bg='white', command=kill).place(x=281, y=480)
+Button(root, text="CLEAR", borderwidth=3, bg='white', command=clear).place(x=100, y=480)
 
 
-# starting the app
-root.mainloop()
+root.mainloop()  # continuously runs program in window

@@ -107,7 +107,7 @@ class Lotto:
             messagebox.showinfo("Email Address", "Correct Email")
 
         else:
-            messagebox.showinfo(title='Alert!', message="Please enter valid email address!")
+            messagebox.showinfo("ERROR", "You Are Kindly Advised to Please enter valid email address!")
             self.email_entry.delete(0, END)
 
     def close(self):

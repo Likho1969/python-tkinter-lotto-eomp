@@ -1,5 +1,0 @@
-* Account Name Holder: Likho Kapesi | Player Account Number: 12345678901 | Bank Branch Code: 123456| Player Bank Type: Discovery Bank
-* Account Name Holder: Likho Kapesi | Player Account Number: 12345678901 | Bank Branch Code: 123456| Player Bank Type: Standard Bank
-* Account Name Holder: Siphokuhle Njobe | Player Account Number: 12345678901 | Bank Branch Code: 123456| Player Bank Type: Capitec Bank
-* Account Name Holder: Likho Kapesi | Player Account Number: 12345678901 | Bank Branch Code: 123456| Player Bank Type: Discovery Bank
-* Account Name Holder: Likho Kapesi | Player Account Number: 12345678901 | Bank Branch Code: 123456| Player Bank Type: Discovery Bank
