@@ -63,8 +63,8 @@ class Bank:
         self.submit_button = tk.Button(root, text="Submit Your Claim", font="sans-serif 12 bold", bg="lime", fg="black", borderwidth="3", width="15", command=self.bank_account)
         self.submit_button.place(x=280, y=500)
 
-        self.submit_button = tk.Button(root, text="Play Again", font="sans-serif 12 bold", bg="lime", fg="black", borderwidth="3", width="15", command=self.play_again)
-        self.submit_button.place(x=280, y=600)
+        self.play_again_button = tk.Button(root, text="Play Again", font="sans-serif 12 bold", bg="lime", fg="black", borderwidth="3", width="15", command=self.play_again)
+        self.play_again_button.place(x=280, y=600)
 
 
         # exit function

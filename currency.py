@@ -130,6 +130,19 @@ class Currency(Converter):
         self.exit_btn = Button(root, text="EXIT", bg="red", fg="black", borderwidth=3, font="sans-serif", command=close)
         self.exit_btn.place(x=500, y=480)
 
+        self.play_again_button = tk.Button(root, text="Play Again", font="sans-serif 12 bold", bg="lime", fg="black", borderwidth="3", width="15", command=self.play_again)
+        self.play_again_button.place(x=280, y=600)
+
+    def play_again(self):
+        try:
+         playsound('button_click_006_53867.mp3')
+        except:
+            print("Unrecognized audio format")
+        self.question = messagebox.askquestion("ITHUBA National Lottery", "Do you want to TRY ANOTHER LUCK?")
+        if self.question == "yes":
+            root.destroy()
+            import lotto_generator
+
 
 app = Converter()
 app2 = Currency()
